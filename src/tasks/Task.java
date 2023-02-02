@@ -5,7 +5,7 @@ import exception.IncorrectArgumentException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public abstract class Task {
+public abstract class Task{
     public enum Type {
         WORK,
         PERSONAL
@@ -24,12 +24,8 @@ public abstract class Task {
 
     public Task(String title, Type type, LocalDateTime dateTime, String description) {
         idGenerator = idGenerator + 1;
-        try {
-            setTitle(title);
-            setDescription(description);
-        } catch (IncorrectArgumentException e) {
-            throw new RuntimeException(e);
-        }
+        setTitle(title);
+        setDescription(description);
         this.type = type;
         this.id = idGenerator;
         this.dateTime = dateTime;
@@ -57,16 +53,24 @@ public abstract class Task {
         return description;
     }
 
-    public void setTitle(String title) throws IncorrectArgumentException {
+    public void setTitle(String title) {
         if (title == null || title.isEmpty() || title.isBlank()) {
-            throw new IncorrectArgumentException(title);
+            try {
+                throw new IncorrectArgumentException(title);
+            } catch (IncorrectArgumentException e) {
+                throw new RuntimeException(e);
+            }
         }
         this.title = title;
     }
 
-    public void setDescription(String description) throws IncorrectArgumentException {
+    public void setDescription(String description) {
         if (description == null || description.isEmpty() || description.isBlank()) {
-            throw new IncorrectArgumentException(title);
+            try {
+                throw new IncorrectArgumentException(title);
+            } catch (IncorrectArgumentException e) {
+                throw new RuntimeException(e);
+            }
         }
         this.description = description;
     }
@@ -89,7 +93,7 @@ public abstract class Task {
         return "\n" + "Task № " + id + ":\n " +
                 "Название: " + title + "\n " +
                 "Тип задачи: " + type.name() + "\n " +
-                "Время выполнения: " + dateTime + "\n " +
+                "Время выполнения: " + dateTime.getHour()+":"+dateTime.getMinute()+ " "+ dateTime.getDayOfMonth()+"."+dateTime.getMonthValue()+"."+dateTime.getYear() + "\n " +
                 "Описание: " + description;
     }
 }
