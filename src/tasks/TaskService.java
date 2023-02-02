@@ -6,29 +6,33 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class TaskService {
-    private Map<Integer, Task> taskMap = new HashMap<>();
-    private Set<Task> removedTasks = new HashSet<>();
+    public static Map<Integer, Task> taskMap = new HashMap<>();
+    public static List<Task> removedTasks = new ArrayList<>();
 
-    public void add(Task task) {
+    public static void add(Task task) {
         taskMap.put(task.getId(), task);
     }
 
-    public Task remove(int id) {
+    public static Task remove(int id) {
         Task removedTask = taskMap.get(id);
         removedTasks.add(removedTask);
         taskMap.remove(id);
         return removedTask;
     }
 
-    public LinkedList<Task> getAllByDate(LocalDate localDate) throws TaskNotFoundException {
+    public static LinkedList<Task> getAllByDate(LocalDate localDate) {
         LinkedList<Task> tasksByDate = new LinkedList<>();
         for (Task value : taskMap.values()) {
-            if (value.getDateTime().toLocalDate() == localDate) {
+            if (value.getDateTime().toLocalDate().equals(localDate)) {
                 tasksByDate.add(value);
             }
         }
         if (tasksByDate.isEmpty()) {
-            throw new TaskNotFoundException();
+            try {
+                throw new TaskNotFoundException();
+            } catch (TaskNotFoundException e) {
+                throw new RuntimeException(e);
+            }
         } else {
             return tasksByDate;
         }

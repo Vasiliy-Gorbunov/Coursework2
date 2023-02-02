@@ -9,13 +9,6 @@ public abstract class Task {
     public enum Type {
         WORK,
         PERSONAL
-//        public Type[] values() {
-//            Type[] values = new Type[];
-//            return
-//        }
-//        public Type valuesOf(String) {
-//
-//        }
     }
 
     private static int idGenerator = 0;
@@ -83,17 +76,17 @@ public abstract class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return id == task.id && Objects.equals(title, task.title) && type == task.type && Objects.equals(dateTime, task.dateTime) && Objects.equals(description, task.description);
+        return Objects.equals(title, task.title) && type == task.type && Objects.equals(dateTime, task.dateTime) && Objects.equals(description, task.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, type, id, dateTime, description);
+        return Objects.hash(title, type, dateTime, description);
     }
 
     @Override
     public String toString() {
-        return "tasks.Task № " + id + ":\n " +
+        return "\n" + "Task № " + id + ":\n " +
                 "Название: " + title + "\n " +
                 "Тип задачи: " + type.name() + "\n " +
                 "Время выполнения: " + dateTime + "\n " +
