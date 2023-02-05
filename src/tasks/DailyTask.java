@@ -14,6 +14,6 @@ public class DailyTask extends Task{
 
     @Override
     public boolean appearsIn(LocalDate dateForChecking) {
-        return (dateForChecking.isAfter(getDateTime().toLocalDate()) && dateForChecking == getDateTime().toLocalDate());
+        return (dateForChecking.isAfter(getDateTime().toLocalDate()));
     }
 }

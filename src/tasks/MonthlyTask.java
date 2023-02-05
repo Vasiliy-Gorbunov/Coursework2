@@ -16,6 +16,6 @@ public class MonthlyTask extends Task{
 
     @Override
     public boolean appearsIn(LocalDate dateForChecking) {
-        return (dateForChecking.isAfter(getDateTime().toLocalDate()) || dateForChecking.isEqual(getDateTime().toLocalDate()) && dateForChecking.getDayOfMonth() == getDateTime().getDayOfMonth());
+        return (dateForChecking.isAfter(getDateTime().toLocalDate()) || dateForChecking.isEqual(getDateTime().toLocalDate())) && dateForChecking.getDayOfMonth() == getDateTime().getDayOfMonth();
     }
 }

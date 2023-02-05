@@ -17,6 +17,6 @@ public class WeeklyTask extends Task{
 
     @Override
     public boolean appearsIn(LocalDate dateForChecking) {
-        return (dateForChecking.isAfter(getDateTime().toLocalDate()) || dateForChecking.isEqual(getDateTime().toLocalDate()) && dateForChecking.getDayOfWeek() == getDateTime().getDayOfWeek());
+        return (dateForChecking.isAfter(getDateTime().toLocalDate()) || dateForChecking.isEqual(getDateTime().toLocalDate())) && dateForChecking.getDayOfWeek() == getDateTime().getDayOfWeek();
     }
 }
