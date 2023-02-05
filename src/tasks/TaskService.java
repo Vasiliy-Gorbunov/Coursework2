@@ -43,11 +43,11 @@ public class TaskService {
         return removedTasks;
     }
 
-    public static Task updateTitle(int id, String title){
+    public static Task updateTitle(int id, String title) throws IncorrectArgumentException {
         taskMap.get(id).setTitle(title);
         return taskMap.get(id);
     }
-    public static Task updateDescription(int id, String description){
+    public static Task updateDescription(int id, String description) throws IncorrectArgumentException {
         taskMap.get(id).setDescription(description);
         return taskMap.get(id);
     }

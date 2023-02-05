@@ -2,6 +2,7 @@ package tasks;
 
 import exception.IncorrectArgumentException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class YearlyTask extends Task{
@@ -14,7 +15,7 @@ public class YearlyTask extends Task{
     }
 
     @Override
-    public LocalDateTime appearsIn() {
-        return getDateTime().plusYears(1);
+    public boolean appearsIn(LocalDate dateForChecking) {
+        return (dateForChecking.isAfter(getDateTime().toLocalDate()) || dateForChecking.isEqual(getDateTime().toLocalDate()) && dateForChecking.getDayOfYear() == getDateTime().getDayOfYear());
     }
 }

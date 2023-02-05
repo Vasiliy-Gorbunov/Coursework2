@@ -2,6 +2,7 @@ package tasks;
 
 import exception.IncorrectArgumentException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class MonthlyTask extends Task{
@@ -14,7 +15,7 @@ public class MonthlyTask extends Task{
     }
 
     @Override
-    public LocalDateTime appearsIn() {
-        return getDateTime().plusMonths(1);
+    public boolean appearsIn(LocalDate dateForChecking) {
+        return (dateForChecking.isAfter(getDateTime().toLocalDate()) || dateForChecking.isEqual(getDateTime().toLocalDate()) && dateForChecking.getDayOfMonth() == getDateTime().getDayOfMonth());
     }
 }

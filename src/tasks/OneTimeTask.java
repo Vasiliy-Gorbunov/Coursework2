@@ -2,6 +2,7 @@ package tasks;
 
 import exception.IncorrectArgumentException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class OneTimeTask extends Task{
@@ -14,7 +15,7 @@ public class OneTimeTask extends Task{
     }
 
     @Override
-    public LocalDateTime appearsIn() {
-        return null;
+    public boolean appearsIn(LocalDate dateForChecking) {
+        return false;
     }
 }

@@ -2,14 +2,11 @@ package tasks;
 
 import exception.IncorrectArgumentException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public abstract class Task{
-    public enum Type {
-        WORK,
-        PERSONAL
-    }
+public abstract class Task {
 
     private static int idGenerator = 0;
     private String title;
@@ -19,19 +16,23 @@ public abstract class Task{
     private String description;
 
     public Task(String title, Type type, String description) {
-        this(title,type,LocalDateTime.now(),description);
+        this(title, type, LocalDateTime.now(), description);
     }
 
     public Task(String title, Type type, LocalDateTime dateTime, String description) {
         idGenerator = idGenerator + 1;
-        setTitle(title);
-        setDescription(description);
+        try {
+            setTitle(title);
+            setDescription(description);
+        } catch (IncorrectArgumentException e) {
+            throw new RuntimeException(e);
+        }
         this.type = type;
         this.id = idGenerator;
         this.dateTime = dateTime;
     }
 
-    public abstract LocalDateTime appearsIn();
+    public abstract boolean appearsIn(LocalDate dateForChecking);
 
     public String getTitle() {
         return title;
@@ -53,24 +54,16 @@ public abstract class Task{
         return description;
     }
 
-    public void setTitle(String title) {
+    public void setTitle(String title) throws IncorrectArgumentException {
         if (title == null || title.isEmpty() || title.isBlank()) {
-            try {
-                throw new IncorrectArgumentException(title);
-            } catch (IncorrectArgumentException e) {
-                throw new RuntimeException(e);
-            }
+            throw new IncorrectArgumentException(title);
         }
-        this.title = title;
+                this.title = title;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String description) throws IncorrectArgumentException {
         if (description == null || description.isEmpty() || description.isBlank()) {
-            try {
-                throw new IncorrectArgumentException(title);
-            } catch (IncorrectArgumentException e) {
-                throw new RuntimeException(e);
-            }
+            throw new IncorrectArgumentException(description);
         }
         this.description = description;
     }
@@ -93,7 +86,7 @@ public abstract class Task{
         return "\n" + "Task № " + id + ":\n " +
                 "Название: " + title + "\n " +
                 "Тип задачи: " + type.name() + "\n " +
-                "Время выполнения: " + dateTime.getHour()+":"+dateTime.getMinute()+ " "+ dateTime.getDayOfMonth()+"."+dateTime.getMonthValue()+"."+dateTime.getYear() + "\n " +
+                "Время выполнения: " + dateTime.getHour() + ":" + dateTime.getMinute() + " " + dateTime.getDayOfMonth() + "." + dateTime.getMonthValue() + "." + dateTime.getYear() + "\n " +
                 "Описание: " + description;
     }
 }

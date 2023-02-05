@@ -1,11 +1,11 @@
-import static tasks.Task.Type.*;
+import tasks.DailyTask;
+import tasks.TaskService;
+import tasks.Type;
+import tasks.WeeklyTask;
 
-import tasks.*;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Map;
+
+import static tasks.Type.*;
 
 public class Main {
     public static void main(String[] args) {

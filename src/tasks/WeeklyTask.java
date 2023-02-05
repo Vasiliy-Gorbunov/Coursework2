@@ -2,6 +2,7 @@ package tasks;
 
 import exception.IncorrectArgumentException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class WeeklyTask extends Task{
     }
 
     @Override
-    public LocalDateTime appearsIn() {
-        return getDateTime().plusWeeks(1);
+    public boolean appearsIn(LocalDate dateForChecking) {
+        return (dateForChecking.isAfter(getDateTime().toLocalDate()) || dateForChecking.isEqual(getDateTime().toLocalDate()) && dateForChecking.getDayOfWeek() == getDateTime().getDayOfWeek());
     }
 }
