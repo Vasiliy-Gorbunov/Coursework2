@@ -2,14 +2,11 @@ package tasks;
 
 import exception.IncorrectArgumentException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 public abstract class Task {
-    public enum Type {
-        WORK,
-        PERSONAL
-    }
 
     private static int idGenerator = 0;
     private String title;
@@ -19,7 +16,7 @@ public abstract class Task {
     private String description;
 
     public Task(String title, Type type, String description) {
-        this(title,type,LocalDateTime.now(),description);
+        this(title, type, LocalDateTime.now(), description);
     }
 
     public Task(String title, Type type, LocalDateTime dateTime, String description) {
@@ -35,7 +32,7 @@ public abstract class Task {
         this.dateTime = dateTime;
     }
 
-    public abstract LocalDateTime appearsIn();
+    public abstract boolean appearsIn(LocalDate dateForChecking);
 
     public String getTitle() {
         return title;
@@ -61,12 +58,12 @@ public abstract class Task {
         if (title == null || title.isEmpty() || title.isBlank()) {
             throw new IncorrectArgumentException(title);
         }
-        this.title = title;
+                this.title = title;
     }
 
     public void setDescription(String description) throws IncorrectArgumentException {
         if (description == null || description.isEmpty() || description.isBlank()) {
-            throw new IncorrectArgumentException(title);
+            throw new IncorrectArgumentException(description);
         }
         this.description = description;
     }
@@ -89,7 +86,7 @@ public abstract class Task {
         return "\n" + "Task № " + id + ":\n " +
                 "Название: " + title + "\n " +
                 "Тип задачи: " + type.name() + "\n " +
-                "Время выполнения: " + dateTime + "\n " +
+                "Время выполнения: " + dateTime.getHour() + ":" + dateTime.getMinute() + " " + dateTime.getDayOfMonth() + "." + dateTime.getMonthValue() + "." + dateTime.getYear() + "\n " +
                 "Описание: " + description;
     }
 }

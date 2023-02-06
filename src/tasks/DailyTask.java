@@ -1,5 +1,6 @@
 package tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class DailyTask extends Task{
@@ -12,7 +13,7 @@ public class DailyTask extends Task{
     }
 
     @Override
-    public LocalDateTime appearsIn() {
-        return getDateTime().plusDays(1);
+    public boolean appearsIn(LocalDate dateForChecking) {
+        return (dateForChecking.isAfter(getDateTime().toLocalDate()) || dateForChecking.isEqual(getDateTime().toLocalDate()));
     }
 }
