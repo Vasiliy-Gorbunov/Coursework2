@@ -21,10 +21,10 @@ public class TaskService {
         return removedTask;
     }
 
-    public static LinkedList<Task> getAllByDate(LocalDate localDate) {
-        LinkedList<Task> tasksByDate = new LinkedList<>();
+    public static List<Task> getAllByDate(LocalDate localDate) {
+        List<Task> tasksByDate = new ArrayList<>();
         for (Task value : taskMap.values()) {
-            if (value.getDateTime().toLocalDate().equals(localDate)) {
+            if (value.appearsIn(localDate)) {
                 tasksByDate.add(value);
             }
         }
